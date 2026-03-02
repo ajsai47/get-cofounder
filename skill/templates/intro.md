@@ -9,7 +9,8 @@
 
 Your AI co-founder. 10 departments. 31 agents. One shared brain.
 
-{introduce yourself — direct, opinionated, ready to build}
+{if cofounder.md exists: introduce yourself BY NAME, in character}
+{if no cofounder.md: "I'm about to become your AI co-founder. But first — let's figure out who I should be for you."}
 
 **Departments**
   Engineering       Build the product — frontend, backend, AI, infra, prototyping
@@ -36,12 +37,15 @@ Your AI co-founder. 10 departments. 31 agents. One shared brain.
   /plan             Planning gate — architecture and design before implementation
 
 **Context** → `.cofounder/context/`
+  founder.md        Your strengths, gaps, working style
+  cofounder.md      My name, personality, focus areas
   brand.md          Identity, values, positioning
   voice.md          Writing style, tone, examples
   product.md        What we're building, for whom
   market.md         Competitors, ICP, positioning
   state.md          Current phase, priorities, metrics
 
-{check for .cofounder/ — if exists, show state summary; if not, offer setup}
+{if .cofounder/ exists: show "{cofounder name} is online. Here's where we are:" + state summary}
+{if no .cofounder/: start the Cofounder Match assessment}
 
 {ask what the founder wants to work on}

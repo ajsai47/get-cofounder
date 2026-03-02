@@ -9,6 +9,8 @@ How the shared brain works. Every agent reads from it. The Cofounder maintains i
 ```
 .cofounder/
 ├── context/           ← the shared brain
+│   ├── founder.md     ← who the founder is (strengths, gaps, style)
+│   ├── cofounder.md   ← who the AI cofounder is (name, archetype, personality)
 │   ├── brand.md       ← who we are
 │   ├── voice.md       ← how we sound
 │   ├── product.md     ← what we're building
@@ -24,6 +26,38 @@ How the shared brain works. Every agent reads from it. The Cofounder maintains i
 ---
 
 ## Context Files
+
+### founder.md — Who You Are
+
+The founder's profile. Generated during the Cofounder Match assessment.
+
+**Contents:**
+- Name
+- Archetype (Builder, Designer, Strategist, Storyteller, Operator)
+- Zone of genius (in their own words)
+- Known gaps (what drains them)
+- Working style (dive in, step back, or talk through)
+- Partnership preference (challenge, complement, or amplify)
+- Key insight (one sentence synthesis)
+
+**Read by:** The Cofounder (shapes how to interact, what to lean into, when to push back).
+**Updated by:** Founder via /brief if their self-assessment changes.
+
+### cofounder.md — Who I Am
+
+The AI cofounder's identity. Generated during the Cofounder Match assessment. This is not a settings file — it's a personality that shapes every interaction.
+
+**Contents:**
+- Name (chosen by founder or generated)
+- Archetype (The Operator, The Scaler, The Executor, The Architect, The Visionary)
+- Personality (2-3 sentences, first person)
+- Primary focus areas (3-4 departments)
+- Communication style (directness, push-back level, autonomy)
+- Signature behavior (a specific habit)
+- What they never do (anti-patterns)
+
+**Read by:** Every agent (via the Cofounder's briefing). The cofounder's name and personality color all interactions.
+**Updated by:** Founder via /brief if they want to adjust the relationship.
 
 ### brand.md — Who We Are
 
@@ -227,17 +261,18 @@ First time initialization:
 
 1. Create `.cofounder/` directory structure
 2. Add `.cofounder/` to `.gitignore`
-3. Walk the founder through each context file:
+3. **Cofounder Match** — assess the founder (strengths, gaps, working style, partnership preference), generate complementary cofounder identity. Write `founder.md` and `cofounder.md`.
+4. Walk the founder through each company context file:
+   - Product: "What are you building? For whom? What's the stack?"
    - Brand: "What's your company? What do you stand for?"
    - Voice: "Share your Twitter or paste how you write. I'll extract your style."
-   - Product: "What are you building? For whom? What's the stack?"
    - Market: "Who are your competitors? Where do your users hang out?"
    - State: "What phase are you in? What are your top priorities?"
-4. Populate files from answers
-5. Initialize empty memory index
-6. Ready to operate
+5. Populate files from answers
+6. Initialize empty memory index
+7. Ready to operate
 
-Don't rush setup. The quality of the context files determines the quality of everything downstream.
+Don't rush setup. The cofounder match is the foundation — it shapes the entire relationship. Company context builds on top of it.
 
 ---
 
@@ -248,6 +283,24 @@ How to audit, score, and maintain context quality. Stale or incomplete context d
 ### Completeness Checklist
 
 Before marking a context file as "done," verify every required field is present and substantive (not placeholder text).
+
+**founder.md:**
+- [ ] Name
+- [ ] Archetype (one of: Builder, Designer, Strategist, Storyteller, Operator)
+- [ ] Zone of genius (in their own words, specific)
+- [ ] Known gaps (specific areas, not vague)
+- [ ] Working style (dive in, step back, or talk through — with implication)
+- [ ] Partnership preference (challenge, complement, or amplify — with implication)
+- [ ] Key insight (one sentence synthesis that captures the dynamic)
+
+**cofounder.md:**
+- [ ] Name (not generic — has personality)
+- [ ] Archetype (complementary to founder's archetype)
+- [ ] Personality (2-3 sentences, first person, specific enough to act on)
+- [ ] Primary focus (3-4 departments, aligned with founder's gaps)
+- [ ] Communication style (directness, push-back level, autonomy — each specified)
+- [ ] Signature behavior (one specific habit)
+- [ ] What they never do (at least 1 anti-pattern)
 
 **product.md:**
 - [ ] Product name
@@ -301,6 +354,8 @@ Context files decay at different rates. Stale context is worse than no context �
 
 | File | Stale After | Refresh Trigger | How to Refresh |
 |------|-------------|-----------------|----------------|
+| founder.md | Rarely stale | Founder's self-assessment shifts (new skills, changed focus) | Run `/brief` and update founder profile |
+| cofounder.md | Rarely stale | Founder wants to adjust the relationship dynamic | Run `/brief` and describe what to change |
 | state.md | 1 week | Any priority shift, metric change, or blocker resolved | Run `/sync` — it updates state.md automatically |
 | product.md | Feature launch | Shipping a new feature, changing the stack, or adjusting the roadmap | Run `/brief` and describe what changed |
 | market.md | 1 month | New competitor, market shift, updated positioning | Run `/compete` or update manually after market research |
