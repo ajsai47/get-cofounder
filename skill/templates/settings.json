@@ -1,0 +1,99 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(*)",
+      "Glob(*)",
+      "Grep(*)",
+      "WebSearch",
+      "WebFetch(domain:*)",
+      "Edit(.cofounder/**)",
+      "Write(.cofounder/**)",
+      "Write(content/**)",
+      "Edit(content/**)",
+      "Write(src/**)",
+      "Edit(src/**)",
+      "Bash(npm test *)",
+      "Bash(npm run lint *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(python3 *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git checkout -b *)",
+      "Bash(git stash *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(which *)",
+      "Bash(echo *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git reset *)",
+      "Bash(git checkout -- *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(npm install *)",
+      "Bash(npm publish *)",
+      "Bash(pip install *)",
+      "Bash(pip3 install *)",
+      "Bash(rm *)",
+      "Bash(rmdir *)",
+      "Bash(docker *)",
+      "Bash(curl *)",
+      "Bash(wget *)",
+      "Bash(kill *)",
+      "Bash(killall *)"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(sudo *)",
+      "Bash(mkfs *)",
+      "Bash(dd *)",
+      "Bash(fdisk *)",
+      "Bash(chmod 777 *)",
+      "Bash(> /dev/*)",
+      "Write(.env*)",
+      "Write(*.pem)",
+      "Write(*.key)",
+      "Write(.git/**)",
+      "Write(node_modules/**)",
+      "Edit(.env*)",
+      "Edit(*.pem)",
+      "Edit(*.key)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/cofounder/brand-check.sh",
+            "timeout": 3000,
+            "statusMessage": "Checking brand voice..."
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash $HOME/.claude/hooks/cofounder/security-check.sh",
+            "timeout": 2000,
+            "statusMessage": "Security scan..."
+          }
+        ]
+      }
+    ]
+  },
+  "env": {
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "80",
+    "COFOUNDER_HOOKS_DIR": "$HOME/.claude/hooks/cofounder"
+  }
+}
