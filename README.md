@@ -71,6 +71,9 @@ One person. Full startup output. No context switching between ChatGPT tabs.
 
 ## Features
 
+### Cofounder Match
+Your first interaction is a 5-question assessment. What's your zone of genius? What drains you? How do you like to work? The system generates a complementary AI cofounder -- with a name, an archetype, and a personality shaped by your gaps. A builder gets an Operator. A storyteller gets an Architect. Not a generic assistant. A specific person who fills the roles you can't.
+
 ### Shared Brain
 Every agent reads from the same context files -- your brand identity, writing voice, product details, market positioning, and current priorities. A blog post sounds like your tweet thread sounds like your support response because they all pull from the same `voice.md`.
 
@@ -148,6 +151,8 @@ Every project gets a `.cofounder/` directory -- the shared brain all 31 agents r
 ```
 .cofounder/
 ├── context/                 <- the shared brain
+│   ├── founder.md           <- your strengths, gaps, working style
+│   ├── cofounder.md         <- your AI cofounder's name, personality, focus
 │   ├── brand.md             <- identity, values, visual language, positioning
 │   ├── voice.md             <- writing style, tone, platform-specific examples
 │   ├── product.md           <- what you're building, tech stack, roadmap
@@ -230,15 +235,16 @@ claude
 
 ### 3. Type `/cofounder`
 
-The setup wizard walks you through 5 context files (takes about 5 minutes):
+The setup starts with a **Cofounder Match** -- a quick assessment that figures out who your AI cofounder should be based on your strengths and gaps. Then it walks you through your company context.
 
-1. **Product** -- What you're building, for whom, tech stack, roadmap
-2. **Brand** -- Identity, values, personality, positioning
-3. **Voice** -- Your writing style (it can analyze your Twitter feed or writing samples)
-4. **Market** -- Competitors, ICP, distribution channels
-5. **State** -- Current phase, priorities, metrics
+1. **Cofounder Match** -- Your zone of genius, your gaps, your working style. Generates a named AI cofounder with a complementary personality.
+2. **Product** -- What you're building, for whom, tech stack, roadmap
+3. **Brand** -- Identity, values, personality, positioning
+4. **Voice** -- Your writing style (it can analyze your Twitter feed or writing samples)
+5. **Market** -- Competitors, ICP, distribution channels
+6. **State** -- Current phase, priorities, metrics
 
-After setup, your `.cofounder/` directory is populated and every agent is ready to work.
+After setup, your AI cofounder has a name, a personality, and a shared brain. Every agent is ready to work.
 
 ### 4. Start building
 
