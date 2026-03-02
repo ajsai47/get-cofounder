@@ -30,8 +30,10 @@ Session 1 is good. Session 50 is transformative -- because the system remembers 
 ## Install
 
 ```bash
-git clone https://github.com/ajsai47/get-cofounder.git ~/.cofounder && bash ~/.cofounder/install.sh
+gh repo clone ajsai47/get-cofounder ~/.cofounder && bash ~/.cofounder/install.sh
 ```
+
+> Requires [GitHub CLI](https://cli.github.com/) authenticated with repo access. Ask [@AJs_AI](https://x.com/AJs_AI) for access.
 
 That's it. Open Claude Code in any project. Type `/cofounder`. Follow the 5-minute setup.
 
@@ -216,7 +218,7 @@ For reversible decisions: move fast. For irreversible decisions: slow down and g
 ### 1. Install
 
 ```bash
-git clone https://github.com/ajsai47/get-cofounder.git ~/.cofounder && bash ~/.cofounder/install.sh
+gh repo clone ajsai47/get-cofounder ~/.cofounder && bash ~/.cofounder/install.sh
 ```
 
 ### 2. Open Claude Code in your project

@@ -2,7 +2,7 @@
 set -e
 
 # Cofounder — AI Co-founder for Solo Founders
-# One-line install: git clone https://github.com/ajsai47/get-cofounder.git ~/.cofounder && bash ~/.cofounder/install.sh
+# One-line install: gh repo clone ajsai47/get-cofounder ~/.cofounder && bash ~/.cofounder/install.sh
 
 REPO_URL="https://github.com/ajsai47/get-cofounder.git"
 INSTALL_DIR="$HOME/.cofounder"
@@ -30,7 +30,11 @@ if [ -d "$INSTALL_DIR" ]; then
   cd "$INSTALL_DIR" && git pull --quiet
 else
   echo "  → Downloading Cofounder..."
-  git clone --quiet "$REPO_URL" "$INSTALL_DIR"
+  if command -v gh &>/dev/null && gh auth status &>/dev/null; then
+    gh repo clone ajsai47/get-cofounder "$INSTALL_DIR" -- --quiet
+  else
+    git clone --quiet "$REPO_URL" "$INSTALL_DIR"
+  fi
 fi
 
 # Create .claude directories if they don't exist
