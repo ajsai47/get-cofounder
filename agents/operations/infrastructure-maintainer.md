@@ -76,7 +76,7 @@ Before starting any work:
    ## Services
    | Service | Purpose | Account | Cost | Free Tier Limit |
    |---------|---------|---------|------|-----------------|
-   | Vercel | Hosting | aj@... | $0 | 100GB bandwidth |
+   | Vercel | Hosting | you@... | $0 | 100GB bandwidth |
 
    ## Environment Variables
    | Variable | Where Set | Purpose |

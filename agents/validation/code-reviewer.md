@@ -405,7 +405,7 @@ Why it is bad: No checklist was visibly followed. No specific areas assessed. "D
 > OWASP checklist results:
 > - Injection: PASS. All database queries use Drizzle ORM parameterized queries. No raw SQL. No command execution.
 > - Authentication: PASS. Passwords hashed with argon2 (cost factor 3). Session tokens generated with crypto.randomBytes(32). Sessions expire after 24 hours.
-> - Sensitive data: BLOCKER. [lib/auth.ts:67] The error response on failed login returns `{ error: 'Invalid password for user aj@example.com' }`. This confirms whether an email exists in the system (user enumeration). Change to generic: `{ error: 'Invalid email or password' }`.
+> - Sensitive data: BLOCKER. [lib/auth.ts:67] The error response on failed login returns `{ error: 'Invalid password for user user@example.com' }`. This confirms whether an email exists in the system (user enumeration). Change to generic: `{ error: 'Invalid email or password' }`.
 > - Access control: PASS. Middleware checks userId on all /api/user/* routes. Tested with missing auth header, expired token, and token for different user.
 >
 > Verdict: NEEDS REVISION. One BLOCKER (user enumeration via error message). Fix the error response in lib/auth.ts:67 and this is ready to merge."

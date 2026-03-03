@@ -83,7 +83,7 @@ Use when: Listing a browser extension on the Chrome Web Store.
 **Steps:**
 1. **Title optimization (45 characters max).**
    - Formula: `[Brand Name] — [Primary Keyword/Benefit]` or `[Brand Name]: [What It Does]`
-   - Include the primary keyword the ICP searches for. Example: "Ghost — AI Browser Automation" not just "Ghost"
+   - Include the primary keyword the ICP searches for. Example: "Steadily — AI Health Insights" not just "Steadily"
    - Test: Search for your primary keyword on the Chrome Web Store. Does your title make it clear what you do vs. alternatives?
 
 2. **Short description (132 characters max — this appears in search results).**
@@ -177,8 +177,8 @@ Use when: Listing a VS Code extension.
 1. **Understand the VS Code discovery funnel.** Users find extensions through: in-editor search (most common), web marketplace search, blog recommendations, and peer recommendations. In-editor search is dominant — optimize for it.
 
 2. **Name and display name (in package.json).**
-   - `displayName` is what users see in search results. Include the primary keyword. Example: "Ghost — AI Browser Automation" not just "Ghost."
-   - `name` (the package identifier) should be short and memorable: `ghost-automation` not `ai-powered-browser-automation-tool-by-company-name`.
+   - `displayName` is what users see in search results. Include the primary keyword. Example: "Steadily — AI Health Insights" not just "Steadily."
+   - `name` (the package identifier) should be short and memorable: `steadily-health` not `ai-powered-health-tracking-insights-tool-by-company-name`.
    - Both fields are indexed for search.
 
 3. **README.md IS your listing page.** The VS Code marketplace renders your README as the extension page. Write it like a landing page, not developer documentation:

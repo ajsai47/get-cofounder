@@ -444,19 +444,19 @@ Before starting any work:
 Why it is bad: Completely generic. No specifics about what data this product collects, which laws actually apply, what needs to be in the documents, or what the priorities are. A founder could find this advice in a 2-minute Google search.
 
 **Good legal assessment:**
-> "Legal Assessment: Ghost Chrome Extension
+> "Legal Assessment: Steadily Health Tracker App
 >
-> Data inventory: Ghost collects browsing context (current page URL, page text), user preferences (saved prompts, settings), and account data (email via Clerk auth). Page content is sent to Anthropic API for processing and is NOT stored by Ghost beyond the session. Anthropic's API data policy: data not used for training, retained for 30 days for safety monitoring.
+> Data inventory: Steadily collects health metrics (steps, sleep, heart rate via HealthKit), user preferences (goals, notification settings), and account data (email via Auth0). Health data is sent to OpenAI API for generating personalized insights and is NOT stored by Steadily beyond the session. OpenAI's API data policy: data not used for training, retained for 30 days for safety monitoring.
 >
-> Applicable laws: GDPR (product is available globally), CCPA (California users likely), CAN-SPAM (if sending emails).
+> Applicable laws: GDPR (product is available globally), CCPA (California users likely), HIPAA (health data — likely exempt as consumer wellness app, but confirm).
 >
-> Priority 1 (before launch): Draft Privacy Policy that specifically discloses: (a) page content is sent to Anthropic for processing, (b) Anthropic retains data for 30 days, (c) Ghost does not store page content, (d) email is stored in Clerk. Draft Terms of Service covering acceptable use and liability limitation.
+> Priority 1 (before launch): Draft Privacy Policy that specifically discloses: (a) health data is sent to OpenAI for processing, (b) OpenAI retains data for 30 days, (c) Steadily does not store raw health data, (d) email is stored in Auth0. Draft Terms of Service covering acceptable use and liability limitation.
 >
-> Priority 2 (within 30 days of launch): Sign DPAs with Clerk and Anthropic. Implement account deletion (Clerk API + delete user preferences from Neon). Cookie audit: if PostHog uses cookies, implement consent banner for EU users OR switch to cookieless mode.
+> Priority 2 (within 30 days of launch): Sign DPAs with Auth0 and OpenAI. Implement account deletion (Auth0 API + delete user preferences from database). Cookie audit: if Mixpanel uses cookies, implement consent banner for EU users OR switch to cookieless mode.
 >
 > Priority 3 (within 90 days): Data retention policy (user preferences: until account deleted, server logs: 30 days, analytics: 12 months). "Do Not Sell" link in footer for CCPA.
 >
-> Lawyer recommended for: The browsing context collection (sending page URLs and content to a third party) is legally sensitive. A lawyer should review the privacy policy language and consent flow for this specific data practice. Budget: $500-$1,000 for a one-hour review and redline."
+> Lawyer recommended for: The health data collection (sending metrics to a third-party AI provider) is legally sensitive. A lawyer should review the privacy policy language and consent flow for this specific data practice. Budget: $500-$1,000 for a one-hour review and redline."
 
 ---
 
