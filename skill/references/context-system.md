@@ -7,10 +7,16 @@ How the shared brain works. Every agent reads from it. The Cofounder maintains i
 ## Architecture
 
 ```
+# User scope — identity (portable across projects)
+~/.claude/cofounder-memory/
+├── founder.md         ← who the founder is (strengths, gaps, style)
+├── cofounder.md       ← who the AI cofounder is (name, archetype, personality)
+├── index.md           ← global lesson index
+└── {domain}.md        ← cross-project learnings
+
+# Project scope — company context + memory
 .cofounder/
 ├── context/           ← the shared brain
-│   ├── founder.md     ← who the founder is (strengths, gaps, style)
-│   ├── cofounder.md   ← who the AI cofounder is (name, archetype, personality)
 │   ├── brand.md       ← who we are
 │   ├── voice.md       ← how we sound
 │   ├── product.md     ← what we're building
@@ -29,7 +35,7 @@ How the shared brain works. Every agent reads from it. The Cofounder maintains i
 
 ### founder.md — Who You Are
 
-The founder's profile. Generated during the Cofounder Match assessment.
+The founder's profile. Generated during the Cofounder Match assessment. **Lives at user scope** (`~/.claude/cofounder-memory/founder.md`) — follows you across projects.
 
 **Contents:**
 - Name
@@ -41,11 +47,11 @@ The founder's profile. Generated during the Cofounder Match assessment.
 - Key insight (one sentence synthesis)
 
 **Read by:** The Cofounder (shapes how to interact, what to lean into, when to push back).
-**Updated by:** Founder via /brief if their self-assessment changes.
+**Updated by:** `/recalibrate` if the founder's self-assessment changes.
 
 ### cofounder.md — Who I Am
 
-The AI cofounder's identity. Generated during the Cofounder Match assessment. This is not a settings file — it's a personality that shapes every interaction.
+The AI cofounder's identity. Generated during the Cofounder Match assessment. This is not a settings file — it's a personality that shapes every interaction. **Lives at user scope** (`~/.claude/cofounder-memory/cofounder.md`) — follows you across projects.
 
 **Contents:**
 - Name (chosen by founder or generated)
@@ -57,7 +63,7 @@ The AI cofounder's identity. Generated during the Cofounder Match assessment. Th
 - What they never do (anti-patterns)
 
 **Read by:** Every agent (via the Cofounder's briefing). The cofounder's name and personality color all interactions.
-**Updated by:** Founder via /brief if they want to adjust the relationship.
+**Updated by:** `/recalibrate` if the founder wants to adjust the relationship.
 
 ### brand.md — Who We Are
 
@@ -261,7 +267,7 @@ First time initialization:
 
 1. Create `.cofounder/` directory structure
 2. Add `.cofounder/` to `.gitignore`
-3. **Cofounder Match** — assess the founder (strengths, gaps, working style, partnership preference), generate complementary cofounder identity. Write `founder.md` and `cofounder.md`.
+3. **Cofounder Match** — assess the founder (strengths, gaps, working style, partnership preference), generate complementary cofounder identity. Write identity files to user scope (`~/.claude/cofounder-memory/founder.md` and `cofounder.md`).
 4. Walk the founder through each company context file:
    - Product: "What are you building? For whom? What's the stack?"
    - Brand: "What's your company? What do you stand for?"
@@ -284,7 +290,7 @@ How to audit, score, and maintain context quality. Stale or incomplete context d
 
 Before marking a context file as "done," verify every required field is present and substantive (not placeholder text).
 
-**founder.md:**
+**founder.md** (`~/.claude/cofounder-memory/founder.md`):
 - [ ] Name
 - [ ] Archetype (one of: Builder, Designer, Strategist, Storyteller, Operator)
 - [ ] Zone of genius (in their own words, specific)
@@ -293,7 +299,7 @@ Before marking a context file as "done," verify every required field is present 
 - [ ] Partnership preference (challenge, complement, or amplify — with implication)
 - [ ] Key insight (one sentence synthesis that captures the dynamic)
 
-**cofounder.md:**
+**cofounder.md** (`~/.claude/cofounder-memory/cofounder.md`):
 - [ ] Name (not generic — has personality)
 - [ ] Archetype (complementary to founder's archetype)
 - [ ] Personality (2-3 sentences, first person, specific enough to act on)
@@ -354,8 +360,8 @@ Context files decay at different rates. Stale context is worse than no context �
 
 | File | Stale After | Refresh Trigger | How to Refresh |
 |------|-------------|-----------------|----------------|
-| founder.md | Rarely stale | Founder's self-assessment shifts (new skills, changed focus) | Run `/brief` and update founder profile |
-| cofounder.md | Rarely stale | Founder wants to adjust the relationship dynamic | Run `/brief` and describe what to change |
+| founder.md | Rarely stale | Founder's self-assessment shifts (new skills, changed focus) | Run `/recalibrate` to update founder profile |
+| cofounder.md | Rarely stale | Founder wants to adjust the relationship dynamic | Run `/recalibrate` to adjust identity |
 | state.md | 1 week | Any priority shift, metric change, or blocker resolved | Run `/sync` — it updates state.md automatically |
 | product.md | Feature launch | Shipping a new feature, changing the stack, or adjusting the roadmap | Run `/brief` and describe what changed |
 | market.md | 1 month | New competitor, market shift, updated positioning | Run `/compete` or update manually after market research |

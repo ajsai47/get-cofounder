@@ -1,6 +1,19 @@
 #!/bin/bash
 set -e
 
+# Pre-flight: Verify Claude Code is installed
+if ! command -v claude &>/dev/null; then
+  echo ""
+  echo "  ERROR: Claude Code is not installed."
+  echo ""
+  echo "  Cofounder requires Claude Code (Anthropic's CLI for Claude)."
+  echo "  Install it first: npm install -g @anthropic-ai/claude-code"
+  echo ""
+  echo "  Then re-run: bash ~/.cofounder/install.sh"
+  echo ""
+  exit 1
+fi
+
 # Cofounder — AI Co-founder for Solo Founders
 # One-line install: gh repo clone ajsai47/get-cofounder ~/.cofounder && bash ~/.cofounder/install.sh
 

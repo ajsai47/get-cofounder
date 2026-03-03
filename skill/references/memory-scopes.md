@@ -28,6 +28,10 @@ Without scopes, everything lands in `.cofounder/memory/` and you get voice patte
 
 Global knowledge that belongs to the person, not the project. Stored in the home directory so it is available regardless of which project is active.
 
+**Identity files** — `founder.md` and `cofounder.md` live here. The cofounder relationship is portable: once established, the same identity follows you to every project. Use `/recalibrate` to adjust identity, not `/brief`.
+
+**Evolution tracker** — `evolution.md` records rolling signals about how the cofounder relationship is working: department engagement, gap closure, new gaps, push-back reception, autonomy signals. The context-keeper uses this to suggest `/recalibrate` when the identity drifts from reality.
+
 **Examples:**
 - "I prefer Drizzle over Prisma for new projects"
 - "My writing voice is direct, slightly irreverent, uses short sentences"
@@ -122,6 +126,9 @@ Is this learning specific to this codebase or product?
 ```
 # User scope (global, not committed)
 ~/.claude/cofounder-memory/
+├── founder.md            <- founder profile (identity, portable)
+├── cofounder.md          <- AI cofounder identity (identity, portable)
+├── evolution.md          <- cofounder evolution tracker (rolling signals)
 ├── index.md              <- global lesson index
 ├── voice-patterns.md     <- writing style across projects
 ├── tool-preferences.md   <- preferred tools and configs

@@ -17,7 +17,7 @@
   <img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code compatible" />
   <img src="https://img.shields.io/badge/departments-10-blue" alt="10 departments" />
   <img src="https://img.shields.io/badge/agents-31-blue" alt="31 agents" />
-  <img src="https://img.shields.io/badge/commands-10-blue" alt="10 commands" />
+  <img src="https://img.shields.io/badge/commands-11-blue" alt="11 commands" />
   <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license" />
 </p>
 
@@ -360,7 +360,7 @@ rm -rf ~/.cofounder ~/.claude/skills/cofounder ~/.claude/hooks/cofounder
 for dept in engineering product marketing design project-management operations testing memory ai-adapter validation; do
   rm -rf ~/.claude/agents/$dept
 done
-for cmd in sync brief launch pitch hire retro compete metrics plan research; do
+for cmd in sync brief launch pitch hire retro compete metrics plan research recalibrate; do
   rm -f ~/.claude/commands/$cmd.md
 done
 ```

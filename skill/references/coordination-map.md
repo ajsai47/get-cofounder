@@ -75,6 +75,10 @@ Memory captures: what worked, what didn't, why.
 
 ### 8. Onboard to a New Codebase
 
+**Automatic (on setup):** Cofounder scans the codebase during first-run setup — file structure, tech stack, testing patterns, CI/CD, linting. Results written to `.cofounder/memory/engineering.md`. This gives immediate engineering context without manual effort.
+
+**Deep scan (manual):** For deeper analysis beyond the automatic scan:
+
 **Engineering** (map architecture, patterns, dependencies) --> **Testing** (assess coverage, run tests) --> **Operations/Infra** (map deployment, hosting, costs)
 
 Memory captures: full codebase and infrastructure context for future sessions.

@@ -348,6 +348,94 @@ Decisions are the most valuable type of memory. They prevent rehashing and expla
    - [migration list with rationale]
    ```
 
+## Playbook 8: Cofounder Evolution Check
+
+**When:** During end-of-session capture (hook into Playbook 1, step 1). Runs passively — observe and record, never auto-modify identity.
+
+### What to Track
+
+During every end-of-session scan, observe these signals alongside the standard learning capture:
+
+1. **Department engagement patterns** — which departments did the founder actively work with this session? Which did the cofounder's focus areas cover? Track alignment between cofounder focus and actual usage.
+
+2. **Gap closure signals** — is the founder handling work in their listed "gap" areas independently? Signs:
+   - Founder wrote marketing copy without asking for help
+   - Founder made design decisions confidently
+   - Founder ran ops tasks without delegation
+   - The cofounder's "primary focus" department wasn't needed
+
+3. **New gap signals** — is the founder struggling with areas NOT listed as their gaps? Signs:
+   - Repeated questions in a non-gap domain
+   - Asking the cofounder to take over work the founder "should" handle (per their profile)
+   - Frustration or avoidance in previously comfortable areas
+
+4. **Push-back reception** — how does the founder respond to the cofounder's challenges?
+   - Productive engagement: considers the push-back, adjusts, or explains why they disagree
+   - Dismissal: ignores challenges, gets frustrated with push-back
+   - Seeking more: asks the cofounder "what else am I missing?" or "push harder on this"
+
+5. **Autonomy signals** — how much does the founder trust the cofounder to act independently?
+   - Micromanaging: reviews every agent output, overrides frequently
+   - Trusting: delegates to departments and accepts results
+   - Expanding: asks the cofounder to make decisions without checking in
+
+### Storage
+
+Write observations to `~/.claude/cofounder-memory/evolution.md` (user scope — this tracks the relationship, not the project):
+
+```markdown
+# Cofounder Evolution Tracker
+
+## Department Engagement (last 5 sessions)
+- {date}: Engineering, Product (cofounder focus used: Product, Marketing — partial match)
+- {date}: Marketing, Design (cofounder focus used: Marketing — match)
+
+## Gap Closure Signals (last 5 sessions)
+- {date}: Founder wrote landing page copy independently (listed gap: marketing)
+- {date}: Founder handled pricing strategy solo (listed gap: strategy)
+
+## New Gap Signals (last 5 sessions)
+- {date}: Founder asked for help with test architecture (not a listed gap)
+- {date}: Founder struggled with infrastructure decisions
+
+## Push-Back Reception (last 5 sessions)
+- {date}: Productive — considered cofounder challenge on pricing, adjusted approach
+- {date}: Dismissal — ignored push-back on feature scope
+
+## Autonomy Signals (last 5 sessions)
+- {date}: Delegated full marketing campaign to departments without review
+- {date}: Reviewed every code change from engineering agents
+```
+
+**Max 5 recent entries per section.** When adding a 6th, remove the oldest. This is a rolling window, not a log.
+
+### Recalibration Trigger
+
+After 5+ sessions of tracked signals, evaluate whether the cofounder identity is drifting from reality. Suggest `/recalibrate` when ANY of these patterns emerge:
+
+- **Gap closure**: Founder handled their listed gap independently in 3+ of last 5 sessions
+- **New gap**: Founder struggled with a non-gap area in 3+ of last 5 sessions
+- **Push-back mismatch**: Dismissal or seeking-more pattern in 3+ of last 5 sessions (cofounder's push-back level doesn't match what the founder wants)
+- **Department drift**: Cofounder's listed focus departments went unused for 5+ consecutive sessions
+
+**Tone:** Observational, not prescriptive. Example:
+
+```
+"I've noticed something over the last few sessions — you've been handling
+marketing independently. That used to be one of your gaps. Meanwhile, I've
+seen you lean on me more for testing and infrastructure decisions.
+
+Might be worth running /recalibrate to adjust who I focus on. Just a thought."
+```
+
+**Never auto-modify identity files.** The founder decides when and how to recalibrate. This playbook only observes, records, and suggests.
+
+### Integration with Playbook 1
+
+In Playbook 1 (End-of-Session Memory Capture), step 1, add this to the scan checklist:
+
+- **Cofounder evolution signals:** Check for department engagement, gap closure, new gaps, push-back reception, and autonomy signals. Record to `~/.claude/cofounder-memory/evolution.md` if any notable patterns observed.
+
 ---
 
 ## Memory Index Format
