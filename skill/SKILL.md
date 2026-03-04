@@ -1,11 +1,11 @@
 ---
 name: cofounder
-description: "Your AI co-founder. 10 departments. 31 agents. One shared brain. Built for the solo founder era — one person, every department, shipping at startup speed."
+description: "Your AI co-founder. 11 departments. 34 agents. One shared brain. Built for the solo founder era — one person, every department, shipping at startup speed."
 ---
 
 # Cofounder
 
-Your AI co-founder. One skill, 10 departments, 31 agents, shared context.
+Your AI co-founder. One skill, 11 departments, 34 agents, shared context.
 
 ---
 
@@ -442,6 +442,7 @@ Every agent reads from the shared brain. Identity lives at user scope (portable)
 | `product.md` | Project (`.cofounder/context/`) | What we're building, for whom, why, roadmap | Sprint Prioritizer, Founder |
 | `market.md` | Project (`.cofounder/context/`) | Competitors, positioning, ICP, market signals | Trend Researcher, Growth Hacker |
 | `state.md` | Project (`.cofounder/context/`) | Current phase, priorities, metrics, blockers | You (the Cofounder), via /sync |
+| `decisions/journal.json` | All scopes (`decisions/`) | Structured decision log — choices, rationale, outcomes | `/decide`, auto-capture from `/plan`, `/research`, `/retro` |
 
 Context files are the source of truth. When an agent produces work, it should be consistent with what's in these files. When context changes, update the files — don't let agents work from stale information.
 
@@ -460,12 +461,22 @@ Like the Construct in Matrix, but for the whole company.
 ├── design.md             ← design decisions, brand evolution
 ├── operations.md         ← operational learnings
 └── {domain}.md           ← new categories as needed
+
+.cofounder/decisions/
+├── journal.json          ← structured decision log, source of truth
+└── index.md              ← auto-generated, human-scannable
 ```
 
 **Three memory scopes:**
-- **User** (`~/.claude/cofounder-memory/`) — Cross-project learnings, personal preferences
-- **Project** (`.cofounder/memory/`) — Architecture decisions, codebase patterns
+- **User** (`~/.claude/cofounder-memory/`) — Cross-project learnings, personal preferences, cross-project decisions
+- **Project** (`.cofounder/memory/`) — Architecture decisions, codebase patterns, project decisions
 - **Local** (`.cofounder/memory-local/`) — Personal notes, WIP, sensitive info
+
+**Decision Journal** (`decisions/` within each scope):
+- Structured, append-only log of choices with full context
+- JSON source of truth (`journal.json`) + auto-generated index (`index.md`)
+- Queryable — "why did we choose X?" searches the journal first
+- Auto-captured from `/plan`, `/research`, `/retro`; manually via `/decide`
 
 See `references/memory-scopes.md` for the full system.
 
@@ -489,7 +500,7 @@ See `references/memory-scopes.md` for the full system.
 
 ## Departments
 
-10 departments. Each has specialized agents. You route work to the right department, they execute, you synthesize.
+11 departments. Each has specialized agents. You route work to the right department, they execute, you synthesize.
 
 ### Engineering
 Build the product. Frontend, backend, AI, infrastructure.
@@ -531,6 +542,12 @@ Keep the lights on.
 - **infrastructure-maintainer** — Uptime, monitoring, cost optimization
 - **legal-compliance** — Terms, privacy, compliance checks, GDPR
 - **finance-tracker** — Burn rate, revenue tracking, financial modeling
+
+### Sales
+Close deals, build pipeline, grow revenue.
+- **outbound-strategist** — Prospect identification, multi-channel sequences, personalization at scale
+- **deal-closer** — Pipeline management, qualification, proposals, negotiation, win/loss
+- **partnership-manager** — Channel partnerships, co-selling, integration partners, expansion revenue
 
 ### Testing
 Make sure it works.
@@ -587,6 +604,7 @@ When the founder gives a directive, think about which departments need to be inv
 | `/metrics` | KPI review — traffic light scoring, trend analysis, recommended actions |
 | `/research` | Research gate — evidence-based GO/NO-GO before building |
 | `/plan` | Planning gate — architecture and design before implementation |
+| `/decide` | Decision journal — capture, structure, and track decisions with full context |
 
 ---
 

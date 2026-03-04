@@ -27,6 +27,13 @@ How departments and agents work together. Handoffs, workflows, conflict resoluti
 | **Operations** (infra-maintainer) | **Engineering** (devops-automator) | Alerts, scaling needs, cost analysis | Threshold crossed |
 | **Project Mgmt** (project-shipper) | All departments | Timeline, dependency updates | Sprint boundary or blocker |
 | **Project Mgmt** (experiment-tracker) | **Product** (sprint-prioritizer) | Experiment results, significance | Experiment concludes |
+| **Marketing** (growth-hacker) | **Sales** (outbound-strategist) | Qualified inbound leads, engagement signals | Lead scores above threshold or requests demo |
+| **Sales** (outbound-strategist) | **Sales** (deal-closer) | Qualified prospects, conversation context | Prospect responds positively, meeting booked |
+| **Sales** (deal-closer) | **Product** (sprint-prioritizer) | Feature requests from deals, competitive gaps | Deal blocked by missing feature |
+| **Sales** (deal-closer) | **Marketing** (content-creator) | Case study material, testimonials | Deal closed won |
+| **Sales** (partnership-manager) | **Engineering** (backend-architect) | Integration requirements, API specs | Partnership approved |
+| **Sales** (deal-closer) | **Memory** (context-keeper) | Win/loss analysis, pricing learnings | Deal closed (won or lost) |
+| **Product** (trend-researcher) | **Sales** (partnership-manager) | Partnership opportunities from market research | Ecosystem opportunity identified |
 | **Memory** (context-keeper) | All departments (via context files) | Updated lessons, patterns | Significant work completes |
 
 ---
@@ -73,7 +80,23 @@ Updates: state.md if priorities shift. Memory captures: feedback patterns.
 
 Memory captures: what worked, what didn't, why.
 
-### 8. Onboard to a New Codebase
+### 8. Close a Deal
+
+**Sales/Outbound** (prospect, personalize) --> **Sales/Closer** (qualify, propose, negotiate) --> **Marketing/Content** (case study if won) --> **Memory** (win/loss capture)
+
+Parallel: Outbound can prospect while Closer works existing pipeline. Memory capture after every close.
+
+Updates: `.cofounder/memory/sales.md`. Product gets feature request data if deals are blocked.
+
+### 9. Build a Partnership
+
+**Sales/Partnership** (identify, evaluate) --> **Engineering** (build integration if approved) --> **Marketing/Content** (co-branded content) --> **Sales/Partnership** (activate, measure)
+
+Parallel: Content creation while Engineering builds integration. Sequential: Evaluation before engineering investment.
+
+Updates: `product.md` (new integrations), `.cofounder/memory/sales.md` (partnership learnings).
+
+### 10. Onboard to a New Codebase
 
 **Automatic (on setup):** Cofounder scans the codebase during first-run setup — file structure, tech stack, testing patterns, CI/CD, linting. Results written to `.cofounder/memory/engineering.md`. This gives immediate engineering context without manual effort.
 
@@ -158,7 +181,7 @@ Departments will disagree. That's by design -- different perspectives surface be
      │  Testing ◄───► Design ◄───► Project Mgmt  │
      │       ▲               ▲            ▲      │
      │       ▼               ▼            ▼      │
-     │  AI Adapter     Operations      Memory    │
+     │  AI Adapter     Operations  Sales ◄► Memory│
      └──────────────────────────────────────────┘
 ```
 
@@ -178,6 +201,10 @@ Departments will disagree. That's by design -- different perspectives surface be
 **Build-Measure-Learn:** Engineering builds --> Operations measures --> Product learns --> Engineering builds better
 
 **Content-Growth:** Marketing creates --> Operations tracks --> Growth Hacker optimizes --> Marketing creates better
+
+**Sales Pipeline:** Outbound prospects --> Closer qualifies --> Closer closes --> Memory captures win/loss --> Outbound refines targeting
+
+**Partnership Loop:** Partnership Manager identifies --> Engineering integrates --> Marketing co-promotes --> Partnership Manager measures --> Memory captures learnings
 
 **User Feedback:** Operations collects --> Product synthesizes --> Prioritizer prioritizes --> Engineering ships
 

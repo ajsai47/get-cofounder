@@ -134,7 +134,38 @@ Structure the reflection around five questions:
 **What one thing would make the biggest difference next sprint?**
 - Not three things. One. The highest-leverage process change.
 
-### 4. Score Sprint Health
+### 4. Decision Review
+
+Read the project-scope `decisions/journal.json` (`.cofounder/decisions/journal.json`) if it exists. Filter for decisions made during the sprint period.
+
+For each decision in the sprint range, evaluate:
+
+- **Was it followed?** Did the team actually execute according to this decision?
+- **Expected results?** Did the consequences we anticipated play out?
+- **Same choice again?** Knowing what we know now, would we make the same decision?
+
+**Update decision entries:**
+- If a decision played out well: update `outcome` with what happened, set `outcome_date`
+- If a decision needs revisiting: set `status` to `revisit`, suggest a `review_date`
+- If a decision was reversed in practice: set `status` to `reversed`, capture why in `outcome`
+- If a decision was replaced: set `status` to `superseded`, set `superseded_by`
+
+After updating any entries, regenerate `decisions/index.md` from the journal.
+
+**Add to retro output:**
+```markdown
+## Decision Review
+| ID | Title | Made | Followed? | Outcome | Status |
+|----|-------|------|-----------|---------|--------|
+| DEC-{NNN} | {title} | {date} | Yes/No/Partial | {brief outcome} | active/revisit/reversed |
+
+### Decision Actions
+- DEC-{NNN}: {action to take — keep, revisit, reverse, or enrich}
+```
+
+Omit this section if no decisions were made during the sprint period.
+
+### 5. Score Sprint Health
 
 Calculate the **Sprint Health Score** (0-100):
 
@@ -155,7 +186,7 @@ Interpretation:
 - **40-59**: Struggling. Identify the top blocker and fix it structurally before next sprint.
 - **<40**: Something is fundamentally off. Step back and reassess priorities, scope, or approach.
 
-### 5. Commit to Actions
+### 6. Commit to Actions
 
 Turn insights into specific, actionable commitments. Not "improve estimation" — instead "add 50% buffer to any task involving third-party API integration."
 
@@ -167,7 +198,7 @@ Each action must have:
 
 Limit to **3 actions maximum**. More than that and none of them stick.
 
-### 6. Feed Memory
+### 7. Feed Memory
 
 Route to **Memory (spawn: context-keeper)**:
 
@@ -182,7 +213,7 @@ Save to `.cofounder/memory/estimation.md` (if estimation patterns emerged):
 - Types of work that consistently take longer
 - Multipliers to apply (e.g., "third-party integrations: 1.5x estimate")
 
-### 7. Update State
+### 8. Update State
 
 Update `.cofounder/context/state.md` with:
 - Sprint health score
@@ -230,6 +261,11 @@ Update `.cofounder/context/state.md` with:
 1. **{Action}**: {specific change} — addresses {pattern}
 2. **{Action}**: {specific change} — addresses {pattern}
 3. **{Action}**: {specific change} — addresses {pattern}
+
+## Decision Review
+| ID | Title | Made | Followed? | Outcome | Status |
+|----|-------|------|-----------|---------|--------|
+| DEC-{NNN} | {title} | {date} | {Yes/No/Partial} | {brief outcome} | {status} |
 
 ## Accountability Check
 - Last retro action 1: {implemented / partially / not done}

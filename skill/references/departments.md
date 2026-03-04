@@ -1,6 +1,6 @@
 # Departments
 
-9 departments. 27 agents. How the Cofounder routes work.
+10 departments. 30 agents. How the Cofounder routes work.
 
 ---
 
@@ -26,6 +26,9 @@ When the founder gives a directive, the Cofounder determines:
 | "Set up CI/CD" | Engineering (devops) | Single |
 | "Review our brand" | Design (brand-guardian) | Single |
 | "What tools should we use?" | AI Adapter (tech-advisor) | Single |
+| "Close a deal / manage pipeline" | Sales (deal-closer) | Single or with outbound |
+| "Find prospects / outbound outreach" | Sales (outbound-strategist) | Single |
+| "Build partnerships / integrations" | Sales (partnership-manager) | Single or with Engineering |
 
 ---
 
@@ -129,6 +132,22 @@ When the founder gives a directive, the Cofounder determines:
 **Context required:** `product.md`, `state.md`, `brand.md` (for support voice).
 
 **Key principle:** Automate everything that doesn't require human judgment.
+
+---
+
+### Sales
+
+**Mission:** Close deals, build pipeline, and grow revenue through direct sales, partnerships, and customer expansion.
+
+| Agent | When to Route | Key Output |
+|-------|--------------|------------|
+| outbound-strategist | Prospect identification, outreach sequences, personalization, LinkedIn social selling | Prospect lists, sequences, personalized hooks |
+| deal-closer | Pipeline management, lead qualification, proposals, negotiation, win/loss analysis | Qualified leads, proposals, pipeline reports |
+| partnership-manager | Integration partnerships, co-selling, customer expansion, referral programs | Partnership maps, proposals, expansion plans |
+
+**Context required:** `product.md` (what we sell), `market.md` (ICP, competitors), `brand.md` (identity), `voice.md` (tone), `state.md` (priorities), `.cofounder/memory/sales.md`.
+
+**Key principle:** Every interaction is a data point. Track what works, kill what doesn't. Pipeline is truth — feelings are not.
 
 ---
 

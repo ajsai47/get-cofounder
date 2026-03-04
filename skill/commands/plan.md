@@ -130,7 +130,24 @@ This is where solofounder discipline matters most.
 
 **Scope cuts**: For every plan, explicitly list what you're NOT building. This is as important as what you are building. Scope creep starts with ambiguity about boundaries.
 
-### 8. Validation Gate
+### 8. Capture Tech Decisions
+
+Review the architecture and technology decisions made during this planning process. For each significant choice (new dependency, architecture pattern, vendor selection):
+
+1. Read the project-scope `decisions/journal.json` (`.cofounder/decisions/journal.json`). Create the directory and file if they don't exist (initialize with `{"next_id": 1, "decisions": []}`).
+2. For each tech decision, create a journal entry:
+   - `source`: `"plan"`
+   - `scope`: `"project"` (unless it's a cross-project tool preference → `"user"`)
+   - `departments`: typically `["engineering"]`, add others if the decision affects them
+   - `context`: reference the plan slug and requirement that drove the choice
+   - `options`: include alternatives that were considered during architecture design
+   - `tags`: include the plan slug for traceability
+3. Append entries to journal, increment `next_id` for each
+4. Regenerate `decisions/index.md`
+
+Not every tech choice needs capturing — only decisions where alternatives were genuinely considered. "We used React because the project already uses React" is not a decision. "We chose tRPC over REST for the new API" is.
+
+### 9. Validation Gate
 
 Route to **constitutional-validator** (if one exists in the context system) or apply these checks manually:
 
@@ -144,7 +161,7 @@ Route to **constitutional-validator** (if one exists in the context system) or a
 
 If any check fails, revise the plan before proceeding.
 
-### 9. Document
+### 10. Document
 
 Save the plan to `.cofounder/plans/{slug}.md`.
 
@@ -197,6 +214,9 @@ Based on: `.cofounder/research/{slug}.md` — Verdict: GO ({X.X}/5.0)
 | Risk | Likelihood | Impact | Mitigation |
 |------|-----------|--------|------------|
 | {risk} | {H/M/L} | {H/M/L} | {mitigation} |
+
+## Decisions Captured
+- DEC-{NNN}: {tech decision title} (source: plan)
 
 ## Estimated Total: {X hours}
 

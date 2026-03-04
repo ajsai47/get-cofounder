@@ -163,11 +163,11 @@ Parallel: All 3 data collectors. Sequential: Assessment after collection.
     |        |           |
     +--------+-----------+
     v
-  Insights (5 questions) -> Score (0-100) -> 3 Actions (max)
+  Insights (5 questions) -> Decision Review -> Score (0-100) -> 3 Actions (max)
     |
-  memory/retros.md + memory/estimation.md + state.md
+  memory/retros.md + memory/estimation.md + decisions/journal.json + state.md
 ```
-Parallel: All 3 data gatherers. Sequential: Insights -> Score -> Actions.
+Parallel: All 3 data gatherers. Sequential: Insights -> Decision Review -> Score -> Actions.
 
 ### /pitch — Read Everything, Build Narrative
 
@@ -187,6 +187,36 @@ Parallel: All 3 data gatherers. Sequential: Insights -> Score -> Actions.
     v
   Pitch materials delivered
 ```
+
+### /decide — Decision Capture
+
+```
+  /decide {topic}
+    |
+  Read: state.md, product.md, foundations.md
+    |
+  Check existing decisions in journal.json
+    |
+    +-- Founder stated decision? --> Extract + clarify gaps
+    |
+    +-- Founder weighing options? --> Facilitate (frame -> lenses -> recommend -> trade-offs -> founder decides)
+    |
+    v
+  Collect: title, context, options, decision, consequences, reversibility, departments
+    |
+  Classify scope (project / user / local)
+    |
+  Assign DEC-NNN from journal.json next_id
+    |
+  Append to {scope}/decisions/journal.json
+    |
+  Regenerate {scope}/decisions/index.md
+    |
+  Cross-reference in memory/{domain}.md
+    |
+  Confirm to founder
+```
+Sequential: All steps depend on the prior. No parallel agents needed — this is a structured conversation.
 
 ### /hire — Assess, Define, Publish
 
@@ -209,23 +239,32 @@ Parallel: All 3 data gatherers. Sequential: Insights -> Score -> Actions.
 
 ```
   trend-researcher ---+---> sprint-prioritizer ---> backend-architect
-  feedback-synth. ----+                                    |
+  feedback-synth. ----+          |                         |
   tech-advisor ------------------------------------> (also feeds)
-                                                           v
-                                                    frontend-developer
-                                                           v
-                                                    test-engineer
-                                                           v
-                                                    devops-automator
-                                                           |
-       +----------------------+------------------------+---+
-       v                      v                        v
+                                 |                         v
+                                 |                  frontend-developer
+                                 |                         v
+                                 |                  test-engineer
+                                 |                         v
+                                 |                  devops-automator
+                                 |                         |
+       +----------------------+--|---------------------+---+
+       v                      v  |                     v
   content-creator       social-strategist       analytics-reporter
        v                      v                        |
   brand-guardian         growth-hacker                 |
-                              +----------+-------------+
-                                         v
-                                   context-keeper (feeds memory for next cycle)
+       ^                      |                        |
+       |               +------+                        |
+       |               v                               |
+       |        outbound-strategist                    |
+       |               v                               |
+       |        deal-closer ---------> (feature reqs to sprint-prioritizer)
+       |               v                               |
+       |        partnership-manager --> backend-architect (integrations)
+       |               |                               |
+       +---------------+----------+--------------------+
+                                  v
+                            context-keeper (feeds memory for next cycle)
 ```
 
 ---
@@ -243,6 +282,7 @@ Parallel: All 3 data gatherers. Sequential: Insights -> Score -> Actions.
 | /metrics | analytics-rep., infra-maint., finance-tracker | Assessment -> Recommendations | 3 |
 | /retro | sprint-prior., devops-auto., analytics-rep. | Insights -> Score -> Actions | 3 |
 | /pitch | content-creator, brand-guardian, social-strat. | Narrative arc first | 3 |
+| /decide | (none — structured conversation) | Context -> Facilitate -> Collect -> Store -> Confirm | 0 |
 | /hire | content-creator + brand-guardian (step 3) | Assess -> Define -> Describe -> Process | 3 |
 
 **Rule of thumb:** Evidence gathering is parallel. Synthesis and decisions are sequential.

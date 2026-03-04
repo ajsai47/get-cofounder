@@ -146,7 +146,29 @@ Calculate the average score across all four dimensions:
 
 A NO-GO is not a failure — it's a save. Every NO-GO protects days or weeks of wasted effort.
 
-### 6. Document
+### 6. Capture Verdict as Decision
+
+If the verdict is **GO**, capture it in the Decision Journal:
+
+1. Read the project-scope `decisions/journal.json` (`.cofounder/decisions/journal.json`). Create the directory and file if they don't exist (initialize with `{"next_id": 1, "decisions": []}`).
+2. Create a journal entry:
+   - `title`: "GO: {feature or question}" (e.g., "GO: Build self-serve analytics dashboard")
+   - `source`: `"research"`
+   - `scope`: `"project"`
+   - `departments`: departments identified during feasibility assessment
+   - `context`: the hypothesis and key question from Step 1
+   - `options`: the alternatives considered (build vs. buy vs. integrate, etc.)
+   - `decision`: the GO verdict with score and primary rationale
+   - `consequences`: key risks and trade-offs from the research
+   - `confidence`: map from research score — 4.0+ = `"high"`, 3.5-3.9 = `"medium"`
+   - `reversibility`: based on feasibility assessment
+   - `tags`: include the research slug
+3. Append to journal, increment `next_id`
+4. Regenerate `decisions/index.md`
+
+If the verdict is **NO-GO**, optionally capture with `status: "reversed"` and `decision` explaining why we're not building this. This prevents the same idea from being re-researched without new evidence.
+
+### 7. Document
 
 Save research output to `.cofounder/research/{slug}.md`.
 
@@ -189,6 +211,9 @@ Score: {X.X}/5.0
 
 ## Recommendation
 {what to do next — build, test, defer, or kill}
+
+## Decision Captured
+DEC-{NNN}: {verdict} — {slug} (source: research)
 
 ## If GO: Next Step
 -> Run `/plan {slug}` to create implementation plan

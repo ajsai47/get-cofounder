@@ -94,7 +94,8 @@ When scopes disagree:
 **When:** At the end of every significant work session, or when the founder requests a memory save.
 
 1. **Scan the session for learnings.** Review what happened and identify:
-   - **Decisions made:** What was decided, what alternatives were considered, and why this choice was made. Future sessions need this context to avoid re-debating the same decision.
+   - **Decisions made:** What was decided, what alternatives were considered, and why this choice was made. **Capture significant decisions to the Decision Journal** via Playbook 5 (not just the memory index). Future sessions need this context to avoid re-debating the same decision.
+   - **Decision signals to watch for:** "let's go with", "we chose", "decided to", "going with", alternatives discussed then one selected. When detected, route to Playbook 5 for structured capture.
    - **Problems solved:** What broke, what the root cause was, and what fixed it. Future sessions should not re-investigate solved problems.
    - **Approaches that worked:** What method/technique produced good results? Capture the pattern so it can be reused.
    - **Approaches that failed:** What was tried and didn't work? Why? This prevents wasting time on the same dead ends.
@@ -220,11 +221,11 @@ When scopes disagree:
    - "We're running a pricing experiment — don't change the pricing page"
    - "The Stripe webhook is temporarily disabled — billing operations require manual processing"
 
-## Playbook 5: Decision Record Capture
+## Playbook 5: Decision Record Capture (Journal Integration)
 
 **When:** A significant decision is made that future sessions need to understand.
 
-Decisions are the most valuable type of memory. They prevent rehashing and explain why things are the way they are.
+Decisions are the most valuable type of memory. They prevent rehashing and explain why things are the way they are. **All decisions are stored in the Decision Journal** (`decisions/journal.json` within the appropriate scope directory).
 
 1. **Identify decision-worthy choices.** Not every choice needs recording. Record when:
    - Alternatives were seriously considered (not an obvious choice)
@@ -232,38 +233,53 @@ Decisions are the most valuable type of memory. They prevent rehashing and expla
    - Future-you will wonder "why did we do it this way?"
    - The decision affects multiple agents or departments
 2. **Classify the decision's scope:**
-   - Personal preference that applies across projects (e.g., "I always use Biome over ESLint") — User scope
-   - Project-specific architectural choice (e.g., "We chose Neon over Supabase for this project") — Project scope
-   - Temporary or exploratory decision (e.g., "Trying a new auth approach, not finalized") — Local scope
-3. **Capture the decision record:**
-   ```markdown
-   ## Decision: {title}
-   **Date:** {date}
-   **Scope:** {user | project | local}
-   **Status:** Decided / Superseded by [newer decision]
-
-   ### Context
-   {What situation prompted this decision? What problem were we solving?}
-
-   ### Options Considered
-   1. **{Option A}**: {description}
-      - Pros: {list}
-      - Cons: {list}
-   2. **{Option B}**: {description}
-      - Pros: {list}
-      - Cons: {list}
-
-   ### Decision
-   We chose {Option X} because {primary reason}.
-
-   ### Consequences
-   - {what this means going forward}
-   - {trade-offs we accepted}
-   - {what would need to change for us to revisit this}
+   - Personal preference that applies across projects (e.g., "I always use Biome over ESLint") — User scope (`~/.claude/cofounder-memory/decisions/journal.json`)
+   - Project-specific architectural choice (e.g., "We chose Neon over Supabase for this project") — Project scope (`.cofounder/decisions/journal.json`)
+   - Temporary or exploratory decision (e.g., "Trying a new auth approach, not finalized") — Local scope (`.cofounder/memory-local/decisions/journal.json`)
+3. **Build the decision entry:**
+   ```json
+   {
+     "id": "DEC-NNN",
+     "title": "Choose Neon over Supabase for database",
+     "date": "2026-03-03",
+     "status": "active",
+     "superseded_by": null,
+     "scope": "project",
+     "departments": ["engineering"],
+     "reversibility": "moderate",
+     "confidence": "high",
+     "source": "session",
+     "context": "What prompted the decision",
+     "options": [
+       {"name": "Option A", "pros": ["..."], "cons": ["..."]},
+       {"name": "Option B", "pros": ["..."], "cons": ["..."]}
+     ],
+     "decision": "What we chose and why",
+     "consequences": "Trade-offs accepted",
+     "review_date": null,
+     "outcome": null,
+     "outcome_date": null,
+     "tags": ["database", "infrastructure"]
+   }
    ```
-4. **Store in the appropriate domain file within the correct scope.** Engineering decisions in engineering.md, product decisions in design.md, etc.
-5. **Add a one-line entry to the scope's index.** Reference the decision with enough context to be useful:
-   - "[E-015] Chose Neon over Supabase for database — serverless Postgres with branching. Revisit if we need auth bundled with DB."
+4. **Store in the Decision Journal:**
+   - Read the appropriate scope's `decisions/journal.json` (create directory and file if they don't exist, initializing with `{"next_id": 1, "decisions": []}`)
+   - Assign `DEC-NNN` from `next_id`, increment `next_id`
+   - Append to the `decisions` array
+   - Write updated `journal.json`
+   - Regenerate `decisions/index.md` from the journal
+5. **Cross-reference in memory:** Add a one-line entry to the scope's memory index referencing the decision:
+   - `[E-015] DEC-042: Chose Neon over Supabase for database — see decisions/journal.json`
+
+### Detection Signals
+
+During Playbook 1 (End-of-Session Memory Capture), scan for decision signals in addition to the standard learning capture:
+
+- **Explicit signals:** "let's go with X", "we chose Y because", "decided to", "going with", "we're using X instead of Y"
+- **Structural signals:** Multiple alternatives discussed, one selected with rationale
+- **Command-derived:** `/research` GO verdict, `/plan` tech choice, `/retro` decision review
+
+When a decision signal is detected, capture it using this playbook with `source: "session"`. Prefer capturing during the session rather than waiting for end-of-session — decisions are highest-value memory entries.
 
 ## Playbook 6: Memory Scope Migration
 

@@ -471,7 +471,10 @@ Memory is organized into three scopes so that learnings end up in the right plac
 ├── voice-patterns.md
 ├── tool-preferences.md
 ├── engineering-style.md
-└── {domain}.md
+├── {domain}.md
+└── decisions/
+    ├── journal.json
+    └── index.md
 
 # Project scope — project-specific, the existing memory directory
 .cofounder/memory/
@@ -481,11 +484,18 @@ Memory is organized into three scopes so that learnings end up in the right plac
 ├── marketing.md
 └── {domain}.md
 
+.cofounder/decisions/
+├── journal.json
+└── index.md
+
 # Local scope — personal, never committed
 .cofounder/memory-local/
 ├── notes.md
 ├── preferences.md
-└── {anything}.md
+├── {anything}.md
+└── decisions/
+    ├── journal.json
+    └── index.md
 ```
 
 ### Retrieval Order
@@ -523,3 +533,91 @@ The user scope lives outside the project directory (`~/.claude/cofounder-memory/
 Capture (identify learning) -> Classify (pick scope) -> Store (write to scope directory) -> Index (update scope's index.md) -> Retrieve (agents read on session start) -> Prune (context-keeper audits periodically).
 
 The context-keeper agent manages all three scopes. See `.cofounder/agents/memory/context-keeper.md` for playbooks including scope migration and scope auditing.
+
+---
+
+## Decision Journal
+
+A structured, append-only log for tracking decisions across all three scopes. While the memory system captures patterns and learnings, the Decision Journal specifically captures **choices** — what was decided, why, what alternatives existed, and what trade-offs were accepted.
+
+### Why a Separate Journal
+
+Decisions were previously scattered across domain memory files, making them hard to find when someone asks "why did we choose X?" The Decision Journal provides:
+- **Structured queryability** — search by title, tags, departments, or date range
+- **Status tracking** — decisions can be `active`, `superseded`, `revisit`, or `reversed`
+- **Outcome tracking** — `/retro` reviews past decisions and records what actually happened
+- **Auto-capture** — `/plan`, `/research`, and `/retro` automatically log decisions
+
+### Storage
+
+Each scope has its own journal:
+
+```
+# Project scope
+.cofounder/decisions/
+├── journal.json    ← structured entries, source of truth
+└── index.md        ← auto-generated from journal.json
+
+# User scope
+~/.claude/cofounder-memory/decisions/
+├── journal.json
+└── index.md
+
+# Local scope
+.cofounder/memory-local/decisions/
+├── journal.json
+└── index.md
+```
+
+**journal.json format:**
+```json
+{
+  "next_id": 1,
+  "decisions": [
+    {
+      "id": "DEC-001",
+      "title": "...",
+      "date": "2026-03-03",
+      "status": "active",
+      "scope": "project",
+      "departments": ["engineering"],
+      "reversibility": "moderate",
+      "confidence": "high",
+      "source": "manual",
+      "context": "...",
+      "options": [{"name": "...", "pros": [], "cons": []}],
+      "decision": "...",
+      "consequences": "...",
+      "review_date": null,
+      "outcome": null,
+      "tags": []
+    }
+  ]
+}
+```
+
+### Integration Points
+
+| Command | Interaction | Direction |
+|---------|------------|-----------|
+| `/decide` | Manual capture and facilitation | Write |
+| `/sync` | Surfaces recent decisions and pending reviews | Read |
+| `/retro` | Reviews decisions, updates outcomes and status | Read + Write |
+| `/plan` | Auto-captures tech decisions (source: "plan") | Write |
+| `/research` | Auto-captures GO verdicts (source: "research") | Write |
+| context-keeper | Detects decision signals in sessions, captures via Playbook 5 | Write |
+
+### Querying
+
+When the founder asks "why did we choose X?":
+1. Search project-scope `journal.json` (title, decision, tags, context fields)
+2. Fall back to user-scope journal
+3. Fall back to legacy domain memory files
+4. Present the full decision record with context, options, and consequences
+
+### Scope Classification
+
+Same rules as the memory system:
+- "Would this decision apply to other projects?" → User scope
+- "Is this specific to this project?" → Project scope
+- "Is this temporary or experimental?" → Local scope

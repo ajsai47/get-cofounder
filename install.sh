@@ -33,7 +33,7 @@ echo " ██║     ██║   ██║██╔══╝  ██║   ██
 echo " ╚██████╗╚██████╔╝██║     ╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝███████╗██║  ██║"
 echo "  ╚═════╝ ╚═════╝ ╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝"
 echo ""
-echo "  Your AI co-founder — 10 departments, 31 agents"
+echo "  Your AI co-founder — 11 departments, 34 agents"
 echo "  Installing..."
 echo ""
 

@@ -44,7 +44,14 @@ Look for:
 - **Alignment gaps** — output inconsistent with context files
 - **Context staleness** — context files that need updating
 
-### 4. Synthesize Report
+### 4. Check Decision Journal
+
+Read the project-scope `decisions/journal.json` (`.cofounder/decisions/journal.json`) if it exists.
+
+- **Recent Decisions:** Filter entries with `date` since last sync. These are decisions made since the last standup.
+- **Pending Review:** Filter entries with `review_date` within the next 7 days and `status` of `active` or `revisit`. These need founder attention.
+
+### 5. Synthesize Report
 
 Present to the founder:
 
@@ -66,6 +73,14 @@ Present to the founder:
 ### Operations
 - {status}
 
+## Recent Decisions
+- DEC-{NNN}: {title} ({date}) — {one-line summary of choice}
+(Omit this section if no decisions since last sync)
+
+## Pending Decision Reviews
+- DEC-{NNN}: {title} — review by {review_date} ({confidence}, {reversibility})
+(Omit this section if no pending reviews)
+
 ## Blockers
 - {blocker}: {recommended resolution}
 
@@ -81,14 +96,14 @@ Present to the founder:
 - {any context files that should be updated}
 ```
 
-### 5. Update State
+### 6. Update State
 
 After presenting the sync:
 - Update `.cofounder/context/state.md` with current status
 - Save full sync output to `.cofounder/sync/latest.md`
 - Feed memory with any learnings from the sync
 
-### 6. Ask the Founder
+### 7. Ask the Founder
 
 "Based on this sync, here's what I'd recommend focusing on: {top recommendation}. What do you want to tackle?"
 
