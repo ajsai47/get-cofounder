@@ -10,20 +10,20 @@
 </div>
 
 <p align="center">
-  <strong>Your AI co-founder. 10 departments. 31 agents. One shared brain.</strong>
+  <strong>Your AI co-founder. 11 departments. 34 agents. One shared brain.</strong>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code compatible" />
-  <img src="https://img.shields.io/badge/departments-10-blue" alt="10 departments" />
-  <img src="https://img.shields.io/badge/agents-31-blue" alt="31 agents" />
-  <img src="https://img.shields.io/badge/commands-11-blue" alt="11 commands" />
+  <img src="https://img.shields.io/badge/departments-11-blue" alt="11 departments" />
+  <img src="https://img.shields.io/badge/agents-34-blue" alt="34 agents" />
+  <img src="https://img.shields.io/badge/commands-12-blue" alt="12 commands" />
   <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT license" />
 </p>
 
 ---
 
-You're one person running every department. CEO, engineer, marketer, designer, support, ops -- all you. Cofounder gives you a full AI-native org inside Claude Code. Type `/cofounder` and you have a technical co-founder who orchestrates 31 specialized agents across 10 departments, all pulling from a shared brain that knows your brand, your voice, your product, your market, and your current priorities.
+You're one person running every department. CEO, engineer, marketer, designer, support, ops -- all you. Cofounder gives you a full AI-native org inside Claude Code. Type `/cofounder` and you have a technical co-founder who orchestrates 34 specialized agents across 11 departments, all pulling from a shared brain that knows your brand, your voice, your product, your market, and your current priorities.
 
 Session 1 is good. Session 50 is transformative -- because the system remembers everything it learns.
 
@@ -102,9 +102,10 @@ This isn't a yes-man. When you're wrong, it says so -- with evidence. When perfe
 | **Testing** | 3 | Test engineering, performance, tool evaluation |
 | **Memory** | 1 | Persistent context across sessions |
 | **AI Adapter** | 2 | AI-native stack advisor, tool scouting |
+| **Sales** | 3 | Outbound prospecting, deal closing, partnerships |
 | **Validation** | 2 | Quality gates — constitutional validation, code review |
 
-### All 31 Agents
+### All 34 Agents
 
 **Engineering** -- `frontend-developer` `backend-architect` `ai-engineer` `devops-automator` `rapid-prototyper`
 
@@ -124,6 +125,8 @@ This isn't a yes-man. When you're wrong, it says so -- with evidence. When perfe
 
 **AI Adapter** -- `tech-advisor` `tool-scout`
 
+**Sales** -- `outbound-strategist` `deal-closer` `partnership-manager`
+
 **Validation** -- `constitutional-validator` `code-reviewer`
 
 ## Commands
@@ -141,12 +144,13 @@ This isn't a yes-man. When you're wrong, it says so -- with evidence. When perfe
 | `/metrics` | KPI review. Traffic light scoring, trend analysis, recommended actions. |
 | `/research` | Research gate. Evidence-based GO/NO-GO verdict before building. |
 | `/plan` | Planning gate. Architecture and design validation before implementation. |
+| `/decide` | Decision journal. Capture, structure, and track decisions with full context. |
 
 ## How It Works
 
 ### The Shared Brain
 
-Every project gets a `.cofounder/` directory -- the shared brain all 31 agents read from.
+Every project gets a `.cofounder/` directory -- the shared brain all 34 agents read from.
 
 ```
 .cofounder/
@@ -313,13 +317,14 @@ You:  /pitch
 │   ├── commands/                <- slash commands (/sync, /brief, etc.)
 │   ├── references/              <- how the system thinks
 │   └── templates/               <- output templates
-├── agents/                      <- 31 department agents
+├── agents/                      <- 34 department agents
 │   ├── engineering/             <- 5 agents
 │   ├── product/                 <- 3 agents
 │   ├── marketing/               <- 5 agents
 │   ├── design/                  <- 3 agents
 │   ├── project-management/      <- 2 agents
 │   ├── operations/              <- 5 agents
+│   ├── sales/                   <- 3 agents
 │   ├── testing/                 <- 3 agents
 │   ├── validation/             <- 2 agents
 │   ├── memory/                  <- 1 agent
@@ -357,10 +362,10 @@ cd ~/.cofounder && git pull && bash install.sh
 
 ```bash
 rm -rf ~/.cofounder ~/.claude/skills/cofounder ~/.claude/hooks/cofounder
-for dept in engineering product marketing design project-management operations testing memory ai-adapter validation; do
+for dept in engineering product marketing design project-management operations sales testing memory ai-adapter validation; do
   rm -rf ~/.claude/agents/$dept
 done
-for cmd in sync brief launch pitch hire retro compete metrics plan research recalibrate; do
+for cmd in sync brief launch pitch hire retro compete metrics plan research recalibrate decide; do
   rm -f ~/.claude/commands/$cmd.md
 done
 ```
